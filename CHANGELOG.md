@@ -4,6 +4,19 @@ All notable changes to this project are documented in this file. The format is b
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-09-23
+
+### Added
+
+- Dynamic Gradle task discovery from IntelliJ's imported External System model
+- Non-mutating Environment Doctor checks for GTNH detection, project SDK, Gradle wrapper, and imported tasks
+- Background refresh panels for run tasks and environment results
+
+### Changed
+
+- The GTNH tool window now hides unavailable task actions instead of assuming every repository has the same tasks
+- Gradle execution now preserves each task's owning external project path for multi-module builds
+
 ## [0.4.0] - 2026-09-23
 
 ### Added
@@ -58,7 +71,8 @@ All notable changes to this project are documented in this file. The format is b
 - Fixed Kotlin compilation against the IntelliJ 2026.1 API when resolving class types
 - Replaced the PSI-only list renderer used with non-PSI navigation targets, fixing generic-bound and invalid-override errors
 
-[Unreleased]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/GTNewHorizons/GTNHDevelopment/releases/tag/v0.2.0

@@ -8,12 +8,10 @@ import org.jetbrains.plugins.gradle.util.GradleConstants
 
 object GtnhGradleRunner {
 
-    fun run(project: Project, taskName: String) {
-        val basePath = project.basePath ?: return
-
+    fun run(project: Project, task: GtnhGradleTask) {
         val settings = ExternalSystemTaskExecutionSettings().apply {
-            externalProjectPath = basePath
-            taskNames = listOf(taskName)
+            externalProjectPath = task.externalProjectPath
+            taskNames = listOf(task.path)
             externalSystemIdString = GradleConstants.SYSTEM_ID.id
         }
 
@@ -23,5 +21,10 @@ object GtnhGradleRunner {
             project,
             GradleConstants.SYSTEM_ID
         )
+    }
+
+    fun run(project: Project, taskName: String) {
+        val basePath = project.basePath ?: return
+        run(project, GtnhGradleTask(taskName, taskName, basePath, GtnhGradleTaskGroup.OTHER))
     }
 }
