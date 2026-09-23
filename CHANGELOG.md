@@ -4,6 +4,17 @@ All notable changes to this project are documented in this file. The format is b
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-09-24
+
+### Added
+
+- Unified GTNH Tool Window with Overview, Run, Code, Environment, and Contribution sections
+- Complete installation, usage, architecture, compatibility, troubleshooting, and contribution documentation
+
+### Changed
+
+- Plugin metadata and release documentation now describe the complete verified feature set
+
 ## [0.9.0] - 2026-09-24
 
 ### Added
@@ -124,7 +135,8 @@ All notable changes to this project are documented in this file. The format is b
 - Fixed Kotlin compilation against the IntelliJ 2026.1 API when resolving class types
 - Replaced the PSI-only list renderer used with non-PSI navigation targets, fixing generic-bound and invalid-override errors
 
-[Unreleased]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.9.0...HEAD
+[Unreleased]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.9.0...v1.0.0
 [0.9.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.6.0...v0.7.0
