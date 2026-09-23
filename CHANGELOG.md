@@ -4,6 +4,27 @@ All notable changes to this project are documented in this file. The format is b
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-09-23
+
+### Added
+
+- Reverse navigation from a Sponge Mixin class to its controlling configuration fields
+- Generic reverse discovery for class-literal and string registrations in conditional, builder, and direct-call patterns
+- Multiple-field results for compound conditions without boolean simplification
+- A native IntelliJ chooser for ambiguous configuration targets
+- A conservative Mixin gutter marker backed by smart PSI pointers
+- Java PSI fixture coverage for bidirectional links, ambiguous names, broken PSI, and cache invalidation
+
+### Changed
+
+- Config-to-Mixin and Mixin-to-Config navigation now share one provider-based link model
+- Supported IntelliJ build range is declared as 2025.1 through 2026.2 (`251` through `262.*`)
+- String registrations retain all valid ambiguous Mixin candidates instead of guessing
+
+### Fixed
+
+- Simple configuration expressions such as `Config.option` are now included when the reference is the PSI root
+
 ## [0.2.0] - 2026-09-23
 
 ### Added
@@ -28,5 +49,6 @@ All notable changes to this project are documented in this file. The format is b
 - Fixed Kotlin compilation against the IntelliJ 2026.1 API when resolving class types
 - Replaced the PSI-only list renderer used with non-PSI navigation targets, fixing generic-bound and invalid-override errors
 
-[Unreleased]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/GTNewHorizons/GTNHDevelopment/releases/tag/v0.2.0
