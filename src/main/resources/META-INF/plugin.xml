@@ -20,6 +20,7 @@
 
     <!-- Gradle support -->
     <depends>com.intellij.gradle</depends>
+    <depends>Git4Idea</depends>
 
     <!-- Minecraft Development: REQUIRED -->
     <depends>com.demonwav.minecraft-dev</depends>

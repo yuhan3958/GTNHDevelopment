@@ -13,6 +13,7 @@ class GtnhToolWindowFactory : ToolWindowFactory, DumbAware {
             addTab("Overview", GtnhOverviewPanel(project))
             addTab("Run", GtnhRunPanel(project))
             addTab("Environment", GtnhEnvironmentPanel(project))
+            addTab("Contribution", GtnhContributionPanel(project))
         }
         toolWindow.contentManager.addContent(ContentFactory.getInstance().createContent(tabs, "", false))
     }

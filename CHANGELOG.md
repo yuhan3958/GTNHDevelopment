@@ -4,6 +4,19 @@ All notable changes to this project are documented in this file. The format is b
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-09-24
+
+### Added
+
+- Read-only Git branch, worktree, and remote diagnostics through Git4Idea public APIs
+- Project-local explicit confirmations for DevEnv, Fullpack, and AI policy checklist items
+- Truthful editable PR draft generation with Summary, Changes, Testing, Related Issues, and Checklist sections
+- Local copy-only Contribution panel; no automatic pull request submission
+
+### Changed
+
+- Human-only testing and policy claims are never inferred from source changes or Gradle tasks
+
 ## [0.6.0] - 2026-09-23
 
 ### Added
@@ -83,7 +96,8 @@ All notable changes to this project are documented in this file. The format is b
 - Fixed Kotlin compilation against the IntelliJ 2026.1 API when resolving class types
 - Replaced the PSI-only list renderer used with non-PSI navigation targets, fixing generic-bound and invalid-override errors
 
-[Unreleased]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.3.0...v0.4.0

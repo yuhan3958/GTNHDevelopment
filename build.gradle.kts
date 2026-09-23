@@ -25,6 +25,7 @@ dependencies {
 
         // Gradle integration
         bundledPlugin("com.intellij.gradle")
+        bundledPlugin("Git4Idea")
 
         // Required dependency: Minecraft Development
         plugin(
