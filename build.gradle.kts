@@ -35,6 +35,7 @@ dependencies {
 
         testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
         testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Plugin.Java)
+        pluginVerifier()
     }
 }
 
@@ -47,6 +48,17 @@ intellijPlatform {
         ideaVersion {
             sinceBuild = "251"
             untilBuild = "262.*"
+        }
+    }
+
+    pluginVerification {
+        ides {
+            val localVerifierIde = providers.gradleProperty("verifierIdePath")
+            if (localVerifierIde.isPresent) {
+                local(localVerifierIde.get())
+            } else {
+                recommended()
+            }
         }
     }
 }

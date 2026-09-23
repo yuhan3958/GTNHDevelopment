@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>dev.gtnh.intellij</id>
+    <id>dev.gtnh.development</id>
 
     <name>GTNH Development</name>
 
@@ -9,7 +9,9 @@
         IntelliJ IDEA tooling for GregTech: New Horizons development.
 
         Extends Minecraft Development with GTNH-specific project detection,
-        Gradle tasks, navigation, and development workflows.
+        Gradle integration, bidirectional Config/Mixin navigation, patch impact
+        analysis, environment diagnostics, ecosystem discovery, contribution
+        workflows, and previewed code generation.
     ]]></description>
 
     <!-- IntelliJ Platform -->
