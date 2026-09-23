@@ -4,6 +4,18 @@ All notable changes to this project are documented in this file. The format is b
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-09-23
+
+### Added
+
+- Offline GTNH ecosystem dependency detection from IntelliJ module library models
+- Provider-based classification for GTNHLib, StructureLib, ModularUI variants, GT5-Unofficial, and NewHorizonsCoreMod
+- Module-aware dependency overview with resolved versions where available
+
+### Changed
+
+- GTNH dependency classification rules are isolated from aggregation and UI code
+
 ## [0.5.0] - 2026-09-23
 
 ### Added
@@ -71,7 +83,8 @@ All notable changes to this project are documented in this file. The format is b
 - Fixed Kotlin compilation against the IntelliJ 2026.1 API when resolving class types
 - Replaced the PSI-only list renderer used with non-PSI navigation targets, fixing generic-bound and invalid-override errors
 
-[Unreleased]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.2.0...v0.3.0

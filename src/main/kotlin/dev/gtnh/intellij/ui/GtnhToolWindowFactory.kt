@@ -10,6 +10,7 @@ import com.intellij.ui.content.ContentFactory
 class GtnhToolWindowFactory : ToolWindowFactory, DumbAware {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         val tabs = JBTabbedPane().apply {
+            addTab("Overview", GtnhOverviewPanel(project))
             addTab("Run", GtnhRunPanel(project))
             addTab("Environment", GtnhEnvironmentPanel(project))
         }
