@@ -28,6 +28,10 @@
 
         <notificationGroup id="GTNH Development" displayType="BALLOON"/>
 
+        <codeInsight.lineMarkerProvider
+                language="JAVA"
+                implementationClass="dev.gtnh.intellij.mixin.GtnhMixinConfigLineMarkerProvider"/>
+
         <toolWindow
                 id="GTNH"
                 anchor="right"
@@ -42,6 +46,12 @@
                 description="Find Mixin registrations controlled by the selected configuration field">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt G"/>
+        </action>
+        <action id="dev.gtnh.intellij.FindGtnhConfigForMixin"
+                class="dev.gtnh.intellij.action.FindGtnhConfigForMixinAction"
+                text="Find GTNH Config Controlling This Mixin"
+                description="Find configuration fields controlling registration of selected Mixin class">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
     </actions>
 </idea-plugin>
