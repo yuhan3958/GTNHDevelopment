@@ -14,6 +14,7 @@ class GtnhToolWindowFactory : ToolWindowFactory, DumbAware {
             val settings = GtnhSettingsState.getInstance().state
             addTab("Overview", GtnhOverviewPanel(project))
             addTab("Run", GtnhRunPanel(project))
+            addTab("Code", GtnhCodePanel())
             if (settings.environmentDoctor) addTab("Environment", GtnhEnvironmentPanel(project))
             if (settings.prAssistant) addTab("Contribution", GtnhContributionPanel(project))
         }

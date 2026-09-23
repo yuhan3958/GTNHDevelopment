@@ -28,4 +28,15 @@ class GtnhGenerationTest : TestCase() {
         assertTrue(plan.changes.single().displayPath.endsWith("TargetMixin.java"))
         assertEquals(GtnhGenerationConfidence.SAFE_STANDALONE, plan.confidence)
     }
+
+    fun testProjectTemplateAddsMixinConfigurationOnlyWhenSelected() {
+        val plan = GtnhProjectTemplate.plan(
+            GtnhProjectModel("Example", "example", "dev.example", useMixin = true)
+        )
+
+        val mixinConfig = plan.changes.single { it.displayPath == "src/main/resources/mixins.example.json" }
+            as GtnhFileChange.CreateFile
+        assertTrue(mixinConfig.content.contains("\"package\": \"dev.example.mixin\""))
+        assertEquals(4, plan.changes.size)
+    }
 }

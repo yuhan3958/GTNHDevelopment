@@ -12,7 +12,7 @@ data class GtnhProjectModel(
     val useGtnhLib: Boolean = false,
     val useModularUi2: Boolean = false,
     val useStructureLib: Boolean = false,
-    val useMixin: Boolean = true
+    val useMixin: Boolean = false
 )
 
 object GtnhProjectTemplate {
@@ -26,13 +26,20 @@ object GtnhProjectTemplate {
             if (model.useStructureLib) add("    implementation(\"com.github.GTNewHorizons:StructureLib:+\")")
         }.joinToString("\n")
         val sourcePath = "src/main/java/${group.replace('.', '/')}/${modId.replaceFirstChar(Char::uppercase)}Mod.java"
+        val changes = mutableListOf<GtnhFileChange>(
+            GtnhFileChange.CreateFile("settings.gradle.kts", "rootProject.name = \"${model.modName}\"\n"),
+            GtnhFileChange.CreateFile("build.gradle.kts", buildFile(group, dependencies)),
+            GtnhFileChange.CreateFile(sourcePath, "package $group;\n\npublic final class ${modId.replaceFirstChar(Char::uppercase)}Mod {}\n")
+        )
+        if (model.useMixin) {
+            changes += GtnhFileChange.CreateFile(
+                "src/main/resources/mixins.$modId.json",
+                mixinConfig(group)
+            )
+        }
         return GtnhGenerationPlan(
             "Create GTNH mod template",
-            listOf(
-                GtnhFileChange.CreateFile("settings.gradle.kts", "rootProject.name = \"${model.modName}\"\n"),
-                GtnhFileChange.CreateFile("build.gradle.kts", buildFile(group, dependencies)),
-                GtnhFileChange.CreateFile(sourcePath, "package $group;\n\npublic final class ${modId.replaceFirstChar(Char::uppercase)}Mod {}\n")
-            ),
+            changes,
             GtnhGenerationConfidence.HIGH
         )
     }
@@ -46,6 +53,17 @@ object GtnhProjectTemplate {
 
         dependencies {
         $dependencies
+        }
+    """.trimIndent() + "\n"
+
+    private fun mixinConfig(group: String) = """
+        {
+          "required": true,
+          "package": "$group.mixin",
+          "compatibilityLevel": "JAVA_8",
+          "mixins": [],
+          "client": [],
+          "server": []
         }
     """.trimIndent() + "\n"
 }
