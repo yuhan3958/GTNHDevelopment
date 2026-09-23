@@ -15,6 +15,8 @@ repositories {
 }
 
 dependencies {
+    testImplementation("junit:junit:4.13.2")
+
     intellijPlatform {
         intellijIdea(providers.gradleProperty("platformVersion"))
 
@@ -29,6 +31,9 @@ dependencies {
             "com.demonwav.minecraft-dev",
             providers.gradleProperty("minecraftDevVersion").get()
         )
+
+        testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
+        testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Plugin.Java)
     }
 }
 
