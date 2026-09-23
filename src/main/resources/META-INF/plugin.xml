@@ -60,5 +60,17 @@
                 description="Find Mixins, ASM transformers, and access transformers affecting the selected target">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
+        <action id="dev.gtnh.intellij.NewGtnhMixin"
+                class="dev.gtnh.intellij.action.NewGtnhMixinAction"
+                text="New GTNH Mixin"
+                description="Preview and create a standalone GTNH Mixin class">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+        <action id="dev.gtnh.intellij.NewGtnhConfigEntry"
+                class="dev.gtnh.intellij.action.NewGtnhConfigEntryAction"
+                text="New GTNH Config Entry"
+                description="Preview and create a safe standalone configuration entry">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
     </actions>
 </idea-plugin>

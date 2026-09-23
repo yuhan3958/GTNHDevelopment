@@ -4,6 +4,19 @@ All notable changes to this project are documented in this file. The format is b
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-09-24
+
+### Added
+
+- Immutable generation plans with collision, identifier, and project-boundary validation
+- Native preview-and-apply flow for standalone GTNH Mixin and configuration source generation
+- Minimal GTNH Gradle Kotlin DSL project template model with opt-in ecosystem dependencies
+
+### Changed
+
+- Low-confidence repository conventions generate standalone source only and never edit existing registry files
+- Multi-file generation is applied as one IntelliJ write command after explicit confirmation
+
 ## [0.7.0] - 2026-09-24
 
 ### Added
@@ -96,7 +109,8 @@ All notable changes to this project are documented in this file. The format is b
 - Fixed Kotlin compilation against the IntelliJ 2026.1 API when resolving class types
 - Replaced the PSI-only list renderer used with non-PSI navigation targets, fixing generic-bound and invalid-override errors
 
-[Unreleased]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.7.0...HEAD
+[Unreleased]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.8.0...HEAD
+[0.8.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.4.0...v0.5.0
