@@ -8,6 +8,7 @@ import com.intellij.openapi.project.Project
 import dev.gtnh.intellij.patch.provider.AccessTransformerPatchProvider
 import dev.gtnh.intellij.patch.provider.AsmTransformerPatchProvider
 import dev.gtnh.intellij.patch.provider.MixinPatchProvider
+import dev.gtnh.intellij.settings.GtnhSettingsState
 
 @Service(Service.Level.PROJECT)
 class GtnhPatchService(
@@ -36,10 +37,12 @@ class GtnhPatchService(
 
         fun getInstance(project: Project): GtnhPatchService = project.getService(GtnhPatchService::class.java)
 
-        private fun defaultProviders(project: Project): List<GtnhPatchProvider> = listOf(
-            MixinPatchProvider(project),
-            AsmTransformerPatchProvider(project),
-            AccessTransformerPatchProvider(project)
-        )
+        private fun defaultProviders(project: Project): List<GtnhPatchProvider> = buildList {
+            add(MixinPatchProvider(project))
+            if (GtnhSettingsState.getInstance().state.patchHeuristics) {
+                add(AsmTransformerPatchProvider(project))
+                add(AccessTransformerPatchProvider(project))
+            }
+        }
     }
 }

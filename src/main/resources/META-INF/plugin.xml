@@ -27,6 +27,14 @@
 
     <extensions defaultExtensionNs="com.intellij">
 
+        <applicationConfigurable
+                parentId="tools"
+                instance="dev.gtnh.intellij.settings.GtnhSettingsConfigurable"
+                id="dev.gtnh.intellij.settings"
+                displayName="GTNH Development"/>
+
+        <postStartupActivity implementation="dev.gtnh.intellij.project.GtnhFirstRunActivity"/>
+
         <notificationGroup id="GTNH Development" displayType="BALLOON"/>
 
         <codeInsight.lineMarkerProvider

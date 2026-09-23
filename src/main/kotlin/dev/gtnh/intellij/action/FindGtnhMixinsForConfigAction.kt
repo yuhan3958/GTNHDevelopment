@@ -16,12 +16,17 @@ import dev.gtnh.intellij.mixin.GtnhMixinLink
 import dev.gtnh.intellij.mixin.GtnhMixinLinkService
 import dev.gtnh.intellij.project.GtnhProjectDetector
 import dev.gtnh.intellij.ui.GtnhMixinNavigationPopup
+import dev.gtnh.intellij.settings.GtnhSettingsState
 import java.util.concurrent.Callable
 
 class FindGtnhMixinsForConfigAction : AnAction() {
     override fun getActionUpdateThread(): ActionUpdateThread = ActionUpdateThread.BGT
 
     override fun update(event: AnActionEvent) {
+        if (!GtnhSettingsState.getInstance().state.mixinNavigation) {
+            event.presentation.isEnabledAndVisible = false
+            return
+        }
         val project = event.project
         val editor = event.getData(CommonDataKeys.EDITOR)
         val file = event.getData(CommonDataKeys.PSI_FILE)

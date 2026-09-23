@@ -18,6 +18,7 @@ import dev.gtnh.intellij.patch.GtnhPatchService
 import dev.gtnh.intellij.patch.GtnhPatchTarget
 import dev.gtnh.intellij.project.GtnhProjectDetector
 import dev.gtnh.intellij.ui.GtnhPatchImpactPopup
+import dev.gtnh.intellij.settings.GtnhSettingsState
 import java.util.concurrent.Callable
 
 class ShowGtnhPatchImpactAction : AnAction() {
@@ -25,6 +26,10 @@ class ShowGtnhPatchImpactAction : AnAction() {
 
     override fun update(event: AnActionEvent) {
         val project = event.project
+        if (!GtnhSettingsState.getInstance().state.patchImpact) {
+            event.presentation.isEnabledAndVisible = false
+            return
+        }
         val editor = event.getData(CommonDataKeys.EDITOR)
         val file = event.getData(CommonDataKeys.PSI_FILE)
         val target = if (editor != null && file != null) file.findElementAt(editor.caretModel.offset) else null

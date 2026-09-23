@@ -4,6 +4,21 @@ All notable changes to this project are documented in this file. The format is b
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-09-24
+
+### Added
+
+- Settings under Tools > GTNH Development for detection, navigation, gutter, patch, Doctor, PR, and first-run features
+- Per-project force-on and force-off detection state
+- One-time GTNH project detection notification with Tool Window and Environment actions
+- CI compatibility matrix for IntelliJ IDEA 2025.1, 2025.3, and 2026.2 with matching Minecraft Development builds
+
+### Changed
+
+- Optional feature entry points now fail closed through central settings
+- Version-sensitive Minecraft Development, Gradle, and Git access remains isolated in small compatibility adapters
+- Supported plugin build range remains `251` through `262.*`
+
 ## [0.8.0] - 2026-09-24
 
 ### Added
@@ -109,7 +124,8 @@ All notable changes to this project are documented in this file. The format is b
 - Fixed Kotlin compilation against the IntelliJ 2026.1 API when resolving class types
 - Replaced the PSI-only list renderer used with non-PSI navigation targets, fixing generic-bound and invalid-override errors
 
-[Unreleased]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.8.0...HEAD
+[Unreleased]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.9.0...HEAD
+[0.9.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/GTNewHorizons/GTNHDevelopment/compare/v0.5.0...v0.6.0

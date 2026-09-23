@@ -1,0 +1,32 @@
+name: IntelliJ compatibility
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: 2025.1.7
+            minecraft_dev: 2025.1-1.8.11
+          - platform: 2025.3.4
+            minecraft_dev: 2025.3-1.8.17
+          - platform: 2026.2
+            minecraft_dev: 2026.2-1.8.17
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle
+      - uses: gradle/actions/setup-gradle@v4
+      - run: >-
+          ./gradlew test buildPlugin verifyPlugin
+          -PplatformVersion=${{ matrix.platform }}
+          -PminecraftDevVersion=${{ matrix.minecraft_dev }}
