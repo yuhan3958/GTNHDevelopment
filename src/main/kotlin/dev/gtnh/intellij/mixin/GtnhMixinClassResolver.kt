@@ -42,7 +42,7 @@ class GtnhMixinClassResolver(private val project: Project) {
         return result.toList()
     }
 
-    private fun resolveString(value: String, context: PsiElement): List<PsiClass> {
+    fun resolveString(value: String, context: PsiElement): List<PsiClass> {
         val hint = value.trim().removeSuffix(".class")
         if (!looksLikeClassName(hint)) return emptyList()
 

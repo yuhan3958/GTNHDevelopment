@@ -4,6 +4,8 @@ import com.intellij.openapi.progress.ProgressManager
 import com.intellij.psi.PsiAnnotation
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
+import com.intellij.openapi.editor.Editor
+import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiField
 import com.intellij.psi.PsiReferenceExpression
 import com.intellij.psi.util.PsiTreeUtil
@@ -14,12 +16,22 @@ object GtnhMixinUtil {
     fun isMixinClass(psiClass: PsiClass): Boolean =
         psiClass.modifierList?.annotations?.any(::isMixinAnnotation) == true
 
+    fun findMixinClassAtCaret(editor: Editor, file: PsiFile): PsiClass? {
+        val offset = editor.caretModel.offset.coerceAtMost(file.textLength)
+        val element = file.findElementAt(offset)
+            ?: file.findElementAt((offset - 1).coerceAtLeast(0))
+            ?: return null
+        return PsiTreeUtil.getParentOfType(element, PsiClass::class.java, false)?.takeIf(::isMixinClass)
+    }
+
     private fun isMixinAnnotation(annotation: PsiAnnotation): Boolean =
         annotation.resolveAnnotationType()?.qualifiedName == MIXIN_ANNOTATION
 
     fun containsReferenceTo(root: PsiElement?, field: PsiField): Boolean {
         if (root == null) return false
-        return PsiTreeUtil.findChildrenOfType(root, PsiReferenceExpression::class.java).any {
+        val references = sequenceOf(root as? PsiReferenceExpression) +
+            PsiTreeUtil.findChildrenOfType(root, PsiReferenceExpression::class.java).asSequence()
+        return references.filterNotNull().any {
             ProgressManager.checkCanceled()
             it.resolve()?.isEquivalentTo(field) == true
         }

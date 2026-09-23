@@ -66,7 +66,8 @@ class GtnhMixinLinkServiceTest : LightJavaCodeInsightFixtureTestCase() {
         )
 
         val fields = service().findConfigsControllingMixin(psiClass("example.FooMixin"))
-            .map { it.configField.name }
+            .flatMap { it.configFields }
+            .map { it.name }
             .toSet()
         assertEquals(setOf("foo", "bar"), fields)
     }
@@ -114,11 +115,30 @@ class GtnhMixinLinkServiceTest : LightJavaCodeInsightFixtureTestCase() {
         ).findFieldByName("unused", false)!!))
     }
 
+    fun testCachedReverseLinksAreDiscardedAfterPsiModification() {
+        configureSources(
+            source("example.Config", "public static boolean option = true;"),
+            mixin("example.FooMixin"),
+            registry("if (Config.option) { register(FooMixin.class); }")
+        )
+        val mixinClass = psiClass("example.FooMixin")
+        service().findConfigsControllingMixin(mixinClass)
+        assertNotNull(service().cachedConfigsControllingMixin(mixinClass))
+
+        myFixture.addClass("package changed; public class Added {}")
+
+        assertNull(service().cachedConfigsControllingMixin(mixinClass))
+    }
+
     private fun assertBidirectional(configFqn: String, fieldName: String, mixinFqn: String) {
         val configField = field(configFqn, fieldName)
         val mixinClass = psiClass(mixinFqn)
-        assertTrue(service().findMixinsControlledBy(configField).any { it.mixinClass.isEquivalentTo(mixinClass) })
-        assertTrue(service().findConfigsControllingMixin(mixinClass).any { it.configField.isEquivalentTo(configField) })
+        val forward = service().findMixinsControlledBy(configField)
+        assertTrue("forward links: ${forward.map { it.mixinClass.qualifiedName to it.kind }}",
+            forward.any { it.mixinClass.isEquivalentTo(mixinClass) })
+        assertTrue(service().findConfigsControllingMixin(mixinClass).any { link ->
+            link.configFields.any { it.isEquivalentTo(configField) }
+        })
     }
 
     private fun configureSources(vararg sources: Source) {
