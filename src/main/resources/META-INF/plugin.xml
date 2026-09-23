@@ -53,5 +53,11 @@
                 description="Find configuration fields controlling registration of selected Mixin class">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
+        <action id="dev.gtnh.intellij.ShowGtnhPatchImpact"
+                class="dev.gtnh.intellij.action.ShowGtnhPatchImpactAction"
+                text="Show GTNH Patch Impact"
+                description="Find Mixins, ASM transformers, and access transformers affecting the selected target">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
     </actions>
 </idea-plugin>
