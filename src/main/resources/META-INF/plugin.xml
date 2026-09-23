@@ -1,0 +1,47 @@
+<idea-plugin>
+    <id>dev.gtnh.intellij</id>
+
+    <name>GTNH Development</name>
+
+    <vendor>GTNH Development Contributors</vendor>
+
+    <description><![CDATA[
+        IntelliJ IDEA tooling for GregTech: New Horizons development.
+
+        Extends Minecraft Development with GTNH-specific project detection,
+        Gradle tasks, navigation, and development workflows.
+    ]]></description>
+
+    <!-- IntelliJ Platform -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Java support -->
+    <depends>com.intellij.modules.java</depends>
+
+    <!-- Gradle support -->
+    <depends>com.intellij.gradle</depends>
+
+    <!-- Minecraft Development: REQUIRED -->
+    <depends>com.demonwav.minecraft-dev</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+
+        <notificationGroup id="GTNH Development" displayType="BALLOON"/>
+
+        <toolWindow
+                id="GTNH"
+                anchor="right"
+                factoryClass="dev.gtnh.intellij.ui.GtnhToolWindowFactory"/>
+
+    </extensions>
+
+    <actions>
+        <action id="dev.gtnh.intellij.FindGtnhMixinsForConfig"
+                class="dev.gtnh.intellij.action.FindGtnhMixinsForConfigAction"
+                text="Find GTNH Mixins Using This Config"
+                description="Find Mixin registrations controlled by the selected configuration field">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt G"/>
+        </action>
+    </actions>
+</idea-plugin>
