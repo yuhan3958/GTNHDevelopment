@@ -35,6 +35,9 @@
 
     <extensions defaultExtensionNs="com.intellij">
 
+        <newProjectWizard.generator
+                implementation="dev.gtnh.intellij.generation.project.GtnhModNewProjectWizard"/>
+
         <applicationConfigurable
                 parentId="tools"
                 instance="dev.gtnh.intellij.settings.GtnhSettingsConfigurable"
