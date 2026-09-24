@@ -7,7 +7,7 @@ import java.awt.GridLayout
 
 class GtnhCodePanel : JBPanel<GtnhCodePanel>(GridLayout(0, 1, 4, 4)) {
     init {
-        accessibleContext.accessibleName = "GTNH code tools"
+        getAccessibleContext().accessibleName = "GTNH code tools"
         val settings = GtnhSettingsState.getInstance().state
         if (settings.mixinNavigation) {
             add(JBLabel("Config/Mixin Links: use the editor context menu or gutter icons"))
