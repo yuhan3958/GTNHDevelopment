@@ -51,6 +51,10 @@ intellijPlatform {
         }
     }
 
+    publishing {
+        token = providers.environmentVariable("PUBLISH_TOKEN")
+    }
+
     pluginVerification {
         ides {
             val localVerifierIde = providers.gradleProperty("verifierIdePath")
