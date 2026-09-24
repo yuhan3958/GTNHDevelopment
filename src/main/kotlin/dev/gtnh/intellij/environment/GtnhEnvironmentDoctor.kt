@@ -11,7 +11,7 @@ import dev.gtnh.intellij.environment.check.GradleWrapperCheck
 import dev.gtnh.intellij.environment.check.ProjectSdkCheck
 
 @Service(Service.Level.PROJECT)
-class GtnhEnvironmentDoctor(
+class GtnhEnvironmentDoctor @JvmOverloads constructor(
     private val project: Project,
     private val checks: List<GtnhEnvironmentCheck> = defaultChecks()
 ) {

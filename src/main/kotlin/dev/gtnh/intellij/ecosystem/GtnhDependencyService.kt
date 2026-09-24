@@ -7,7 +7,7 @@ import dev.gtnh.intellij.compat.GradleDependencyModelAdapter
 import dev.gtnh.intellij.ecosystem.provider.KnownGtnhDependencyProvider
 
 @Service(Service.Level.PROJECT)
-class GtnhDependencyService(
+class GtnhDependencyService @JvmOverloads constructor(
     private val project: Project,
     private val providers: List<GtnhDependencyProvider> = listOf(KnownGtnhDependencyProvider())
 ) {

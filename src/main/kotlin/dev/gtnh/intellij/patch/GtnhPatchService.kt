@@ -11,7 +11,7 @@ import dev.gtnh.intellij.patch.provider.MixinPatchProvider
 import dev.gtnh.intellij.settings.GtnhSettingsState
 
 @Service(Service.Level.PROJECT)
-class GtnhPatchService(
+class GtnhPatchService @JvmOverloads constructor(
     private val project: Project,
     private val providers: List<GtnhPatchProvider> = defaultProviders(project)
 ) {
