@@ -3,7 +3,9 @@
 
     <name>GTNH Development</name>
 
-    <vendor>GTNH Development Contributors</vendor>
+    <vendor
+            url="https://github.com/yuhan3958/GTNHDevelopment"
+            email="yuhan3958@gmail.com">yuhan3958</vendor>
 
     <description><![CDATA[
         IntelliJ IDEA tooling for GregTech: New Horizons development.
