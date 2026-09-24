@@ -40,6 +40,7 @@ class GtnhStarterInstallerTest : TestCase() {
 
         val error = assertFails { installer(fixtureZip).install(root, model) }
 
+        assertEquals(GtnhStarterInstallationPhase.EXTRACTION, (error as GtnhStarterInstallationException).phase)
         assertTrue(error.message.orEmpty().contains("Unsafe ZIP entry"))
         assertFalse(Files.exists(outside))
     }
@@ -69,6 +70,7 @@ class GtnhStarterInstallerTest : TestCase() {
 
         val error = assertFails { installer(fixtureZip).install(root, model) }
 
+        assertEquals(GtnhStarterInstallationPhase.PUBLISH, (error as GtnhStarterInstallationException).phase)
         assertTrue(error.message.orEmpty().contains("already exists"))
         assertEquals("original", Files.readString(existing))
         assertFalse(Files.exists(root.resolve("a-created.txt")))

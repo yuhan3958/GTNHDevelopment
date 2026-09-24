@@ -1,6 +1,8 @@
 package dev.gtnh.intellij.generation.project
 
 import com.intellij.util.io.HttpRequests
+import com.intellij.openapi.progress.ProcessCanceledException
+import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.StandardCopyOption
@@ -23,13 +25,19 @@ class GtnhStarterInstaller(
         val stagingRoot = Files.createTempDirectory("gtnh-starter-")
         try {
             checkCanceled()
-            archiveProvider(archive)
+            runPhase(GtnhStarterInstallationPhase.DOWNLOAD) { archiveProvider(archive) }
             checkCanceled()
-            extract(archive, stagingRoot, checkCanceled)
-            validateStarter(stagingRoot)
-            GtnhStarterCustomizer.customize(stagingRoot, model)
+            runPhase(GtnhStarterInstallationPhase.EXTRACTION) {
+                extract(archive, stagingRoot, checkCanceled)
+                validateStarter(stagingRoot)
+            }
+            runPhase(GtnhStarterInstallationPhase.CUSTOMIZATION) {
+                GtnhStarterCustomizer.customize(stagingRoot, model)
+            }
             setGradleWrapperExecutable(stagingRoot)
-            publish(stagingRoot, destinationRoot, checkCanceled)
+            runPhase(GtnhStarterInstallationPhase.PUBLISH) {
+                publish(stagingRoot, destinationRoot, checkCanceled)
+            }
             setGradleWrapperExecutable(destinationRoot)
         } finally {
             runCatching { deleteTree(stagingRoot) }
@@ -89,7 +97,7 @@ class GtnhStarterInstaller(
                         } else {
                             Files.copy(source, destination, StandardCopyOption.COPY_ATTRIBUTES)
                         }
-                        created += destination
+                        created.add(destination)
                     }
             }
         } catch (error: Throwable) {
@@ -122,12 +130,38 @@ class GtnhStarterInstaller(
         }
     }
 
+    private inline fun runPhase(phase: GtnhStarterInstallationPhase, action: () -> Unit) {
+        try {
+            action()
+        } catch (error: ProcessCanceledException) {
+            throw error
+        } catch (error: InterruptedException) {
+            throw error
+        } catch (error: GtnhStarterInstallationException) {
+            throw error
+        } catch (error: Exception) {
+            throw GtnhStarterInstallationException(phase, error)
+        }
+    }
+
     companion object {
         const val STARTER_URL =
             "https://github.com/GTNewHorizons/ExampleMod1.7.10/releases/download/master-packages/starter.zip"
         private val EXAMPLE_MAIN_CLASS = Path.of("src", "main", "java", "com", "myname", "mymodid", "MyMod.java")
     }
 }
+
+enum class GtnhStarterInstallationPhase {
+    DOWNLOAD,
+    EXTRACTION,
+    CUSTOMIZATION,
+    PUBLISH
+}
+
+class GtnhStarterInstallationException(
+    val phase: GtnhStarterInstallationPhase,
+    cause: Exception
+) : IOException(cause.message ?: cause.javaClass.simpleName, cause)
 
 private fun downloadStarter(target: Path) {
     HttpRequests.request(GtnhStarterInstaller.STARTER_URL)
