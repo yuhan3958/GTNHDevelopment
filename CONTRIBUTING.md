@@ -1,5 +1,7 @@
 # Contributing to GTNH Development
 
+GTNH Development is an unofficial community project. It is not developed, endorsed, or officially supported by the GT New Horizons team or JetBrains.
+
 ## Development setup
 
 Use Java 21 and the included Gradle Wrapper. Minecraft Development is a required dependency and is resolved by the IntelliJ Platform Gradle Plugin.

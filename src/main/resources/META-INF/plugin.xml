@@ -8,6 +8,10 @@
     <description><![CDATA[
         IntelliJ IDEA tooling for GregTech: New Horizons development.
 
+        <p><strong>Unofficial community project.</strong> GTNH Development is not
+        developed, endorsed, or officially supported by the GT New Horizons team
+        or JetBrains.</p>
+
         Extends Minecraft Development with GTNH-specific project detection,
         Gradle integration, bidirectional Config/Mixin navigation, patch impact
         analysis, environment diagnostics, ecosystem discovery, contribution

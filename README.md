@@ -2,6 +2,9 @@
 
 GTNH Development is an IntelliJ IDEA plugin for GregTech: New Horizons contributors. It extends the required Minecraft Development plugin with GTNH-specific project detection, Gradle workflows, bidirectional configuration/Mixin navigation, patch analysis, environment diagnostics, ecosystem information, contribution assistance, and safe code generation.
 
+> [!IMPORTANT]
+> GTNH Development is an unofficial community project. It is not developed, endorsed, or officially supported by the GT New Horizons team or JetBrains.
+
 Minecraft Development remains responsible for generic Minecraft, Forge, and Sponge Mixin IDE support. GTNH Development adds only GTNH conventions and workflows.
 
 ## Requirements
