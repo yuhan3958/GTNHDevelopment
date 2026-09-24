@@ -4,6 +4,17 @@ All notable changes to this project are documented in this file. The format is b
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-09-24
+
+### Added
+
+- Native GTNH Mod project generator in IntelliJ IDEA's New Project wizard
+- Separate mod name, mod ID, and mod group inputs backed by the official GTNewHorizons starter archive
+
+### Changed
+
+- Generated projects are linked through the public asynchronous Gradle external-system API
+
 ## [1.0.0] - 2026-09-24
 
 ### Added
@@ -135,7 +146,8 @@ All notable changes to this project are documented in this file. The format is b
 - Fixed Kotlin compilation against the IntelliJ 2026.1 API when resolving class types
 - Replaced the PSI-only list renderer used with non-PSI navigation targets, fixing generic-bound and invalid-override errors
 
-[Unreleased]: https://github.com/yuhan3958/GTNHDevelopment/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/yuhan3958/GTNHDevelopment/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/yuhan3958/GTNHDevelopment/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/yuhan3958/GTNHDevelopment/compare/v0.9.0...v1.0.0
 [0.9.0]: https://github.com/yuhan3958/GTNHDevelopment/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/yuhan3958/GTNHDevelopment/compare/v0.7.0...v0.8.0

@@ -4,12 +4,14 @@ import com.intellij.DynamicBundle
 import com.intellij.ide.util.projectWizard.WizardContext
 import com.intellij.ide.wizard.AbstractNewProjectWizardStep
 import com.intellij.ide.wizard.GeneratorNewProjectWizard
-import com.intellij.ide.wizard.NewProjectWizardBaseData
+import com.intellij.ide.wizard.NewProjectWizardBaseData.Companion.baseData
 import com.intellij.ide.wizard.NewProjectWizardChainStep.Companion.nextStep
 import com.intellij.ide.wizard.NewProjectWizardStep
 import com.intellij.ide.wizard.RootNewProjectWizardStep
 import com.intellij.ide.wizard.newProjectWizardBaseStepWithoutGap
 import com.intellij.openapi.options.ConfigurationException
+import com.intellij.openapi.externalSystem.importing.ImportSpecBuilder
+import com.intellij.openapi.externalSystem.util.ExternalSystemUtil
 import com.intellij.openapi.progress.ProcessCanceledException
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.project.Project
@@ -19,7 +21,8 @@ import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.bindText
 import com.intellij.ui.dsl.builder.columns
 import com.intellij.ui.layout.ValidationInfoBuilder
-import org.jetbrains.plugins.gradle.service.project.open.GradleOpenProjectProvider
+import org.jetbrains.plugins.gradle.settings.GradleProjectSettings
+import org.jetbrains.plugins.gradle.util.GradleConstants
 import java.nio.file.Path
 import javax.swing.Icon
 
@@ -34,8 +37,8 @@ class GtnhModNewProjectWizard : GeneratorNewProjectWizard {
             .nextStep(::MetadataStep)
 
     private class MetadataStep(parent: NewProjectWizardStep) : AbstractNewProjectWizardStep(parent) {
-        private val baseData = NewProjectWizardBaseData.getBaseData(this)
-        private val modNameProperty = propertyGraph.property(baseData?.name.orEmpty())
+        private val wizardBaseData = baseData
+        private val modNameProperty = propertyGraph.property(wizardBaseData?.name.orEmpty())
         private val modIdProperty = propertyGraph.property("")
         private val modGroupProperty = propertyGraph.property("")
 
@@ -85,7 +88,13 @@ class GtnhModNewProjectWizard : GeneratorNewProjectWizard {
                     project
                 )
                 if (!completed) throw ProcessCanceledException()
-                GradleOpenProjectProvider().linkToExistingProject(context.projectFileDirectory, project)
+                val gradleSettings = GradleProjectSettings().apply {
+                    externalProjectPath = context.projectFileDirectory
+                }
+                ExternalSystemUtil.linkExternalProject(
+                    gradleSettings,
+                    ImportSpecBuilder(project, GradleConstants.SYSTEM_ID)
+                )
             } catch (error: ProcessCanceledException) {
                 throw error
             } catch (error: GtnhStarterInstallationException) {
